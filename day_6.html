@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+    .code-example {
+      background-color: #1c1c1c;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+    }
+    .side-by-side > div {
+      flex: 1;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Title Slide -->
+      <section>
+        <h2>Day 6</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          CS 480<br>
+          Winter 2025<br>
+        </p>
+      </section>
+
+      <!-- Review of Day 5 -->
+      <section>
+        <h2>Review: Getting Started with AI Pair Programming</h2>
+        <ul>
+          <li>Development environment setup (IDE + AI tools)</li>
+          <li>Testing fundamentals and clean architecture</li>
+          <li>Security considerations specific to AI-assisted development:
+            <ul style="font-size: 0.8em;">
+              <li>Unvetted dependencies and insecure defaults</li>
+              <li>Need for explicit security context in prompts</li>
+              <li>Importance of human review for security-critical code</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Today's Focus -->
+      <section style="font-size: 0.8em;">
+        <h2>Day 6: Test-Driven Development with AI</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Part 1</h3>
+            <ul>
+              <li>TDD fundamentals review</li>
+              <li>Demo: Human-written tests driving AI implementation
+                <ul style="font-size: 0.8em;">
+                  <li>JWT AuthZ examplee</li>
+                  <li>API endpoint validation</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Part 2</h3>
+            <ul>
+              <li>Demo: AI-assisted test generation
+                <ul style="font-size: 0.8em;">
+                  <li>Data structure invariants</li>
+                  <li>Edge case discovery</li>
+                  <li>Self-testing degeneracy: "cheating"</li>
+                </ul>
+              </li>
+              <li>Performance testing strategies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo Overview -->
+      <section style="font-size: 0.6em;">
+        <h2>Two Approaches to AI-Assisted TDD</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Human Tests → AI Code</h3>
+            <ul>
+              <li>Tests as specifications</li>
+              <li>Clear acceptance criteria</li>
+              <li>AI focuses on implementation</li>
+              <li>Human validates correctness</li>
+            </ul>
+          </div>
+          <div>
+            <h3>AI Tests ← Human Requirements</h3>
+            <ul>
+              <li>Requirements as prompts</li>
+              <li>AI suggests test cases</li>
+              <li>Human refines coverage</li>
+              <li>Implementation follows tests</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Looking Ahead -->
+      <section>
+        <h2>Ways of dev with AI</h2>
+        <ul>
+          <li><a href="https://typefully.com/hrishioa/new-ways-to-code-with-llms-iksTq61">article yesterday</a></li>
+          <li><a href="https://typefully.com/hrishioa/new-ways-to-code-with-llms-iksTq61">a response</a></li>
+          <li>my way: some of my prompts and conversations</li>
+        </ul>
+      </section>
+
+      <!-- Questions -->
+      <section>
+        <h2>Questions?</h2>
+        <p>Let's discuss!</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: []
+    });
+  </script>
+</body>
+</html> 

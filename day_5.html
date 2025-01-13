@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+    .code-example {
+      background-color: #1c1c1c;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+    }
+    .side-by-side > div {
+      flex: 1;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Title Slide -->
+      <section>
+        <h2>Day 5: Getting Started with AI Pair Programming</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          CS 480<br>
+          Winter 2025<br>
+        </p>
+      </section>
+
+      <section>
+        <h2>Today's Focus</h2>
+        <ul>
+          <li>Effective AI pair programming patterns</li>
+          <li>Unit Testing</li>
+          <li>Code quality validation strategies</li>
+          <li>Security considerations</li>
+        </ul>
+      </section>
+      <!-- New section for development setup -->
+      <section>
+        <h2>Dev Environment Setup</h2>
+        <div class="side-by-side">
+          <div>
+            <h4>&nbsp;</h3>
+            <ul>
+              <li>IDE with AI</li>
+              <li>Version control setup</li>
+              <li>Test fwk</li>
+              <li>Code quality</li>
+              <li>Code style</li>
+            </ul>
+          </div>
+          <div>
+            <h4>AI to help install:</h3>
+            <ul>
+              <li>Copilot/Cursor</li>
+              <li>GitHub repo w/branches + PRs</li>
+              <li>JUnit/JSUnit/pytest</li>
+              <li>SonarLint/ESLint/Pylint</li>
+              <li>CheckStyle/Prettier/black</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Git Workflow -->
+      <section>
+        <h2>Git Branching & PRs</h2>
+        <ul>
+          <li><a href="https://docs.github.com/en/get-started/quickstart/github-flow">GitHub Flow</a></li>
+          <li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Requests Guide</a></li>
+          <li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow">Keep Main Branch Clean</a></li>
+          <li><a href="https://blog.dnsimple.com/2019/01/two-years-of-squash-merge/">Benefits of Squashing Commits</a></li>
+        </ul>
+      </section>
+
+      <!-- Testing Philosophy and Setup -->
+      <section style="font-size: 0.7em;">
+        <h2>Testing Fundamentals</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Principles</h3>
+            <ul>
+              <li>Tests deliver knowledge about system behavior</li>
+              <li>Every test must make clear assertions</li>
+              <li>Tests have defined boundaries and assumptions</li>
+              <li>Tests should be deterministic and fast</li>
+              <li>Coverage ≠ quality (running code != testing it)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Testing Types</h3>
+            <ul>
+              <li>Unit: Testing isolated components</li>
+              <li>Integration: Testing component interactions</li>
+              <li>End-to-End: Testing complete workflows</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testing Setup -->
+      <section>
+        <h2>Testing Tools & Best Practices</h2>
+        <div class="side-by-side" style="font-size: 0.7em;">
+          <div>
+            <h3>Setup</h3>
+            <ul>
+              <li><a href="https://junit.org/junit5/docs/current/user-guide/">JUnit 5 (Java)</a></li>
+              <li><a href="https://jestjs.io/docs/getting-started">Jest (JavaScript)</a></li>
+              <li><a href="https://docs.pytest.org/en/stable/getting-started.html">pytest (Python)</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Best Practices</h3>
+            <ul>
+              <li>Write small, focused tests</li>
+              <li>Use descriptive test names</li>
+              <li>Test both positive and negative cases</li>
+              <li>Keep tests fast and deterministic</li>
+              <li>Balance isolation vs. maintenance</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Example -->
+      <section>
+        <h2>Test Example</h2>
+        <div class="side-by-side" style="font-size: 0.7em;">
+          <div>
+            <pre><code class="language-python">
+def test_user_creation():
+    # Arrange
+    email = "test@example.com"
+    
+    # Act
+    user = create_user(email)
+    
+    # Assert
+    assert user.email == email
+    assert user.is_active == True
+            </code></pre>
+          </div>
+          <div>
+            <ul>
+              <li>Arrange : Act : Assert pattern</li>
+              <li>Tests one specific behavior</li>
+              <li>Descriptive test name</li>
+              <li>Focused assertions</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Quality Tools -->
+      <section>
+        <h2>Code Quality Tools</h2>
+        <ul>
+          <li><a href="https://www.sonarsource.com/products/sonarlint/">SonarLint</a> - IDE integration for multiple languages</li>
+          <li><a href="https://eslint.org/docs/user-guide/getting-started">ESLint Setup</a> - JavaScript linting</li>
+          <li><a href="https://pylint.readthedocs.io/en/stable">Pylint Guide</a> - Python code analysis</li>
+        </ul>
+      </section>
+
+      <!-- Code Style -->
+      <section>
+        <h2>Code Style Guides & Tools</h2>
+        <ul>
+          <li><a href="https://google.github.io/styleguide/">Google Style Guides</a> - Multi-language standards</li>
+          <li><a href="https://prettier.io/docs/en/install.html">Prettier</a> - JavaScript formatting</li>
+          <li><a href="https://black.readthedocs.io/en/stable/getting_started.html">Black</a> - Python formatter</li>
+          <li><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Code Architecture</a> - Best practices</li>
+        </ul>
+      </section>
+
+      <!-- Clean Architecture Key Rules -->
+      <section>
+        <h2>Clean Architecture: Key Rules</h2>
+        <ul>
+          <li>Independent of "frameworks"</li>
+          <li>Testable without external dependencies</li>
+          <li>Independent of the UI</li>
+          <li>Independent of the database</li>
+          <li>Independent of external agencies</li>
+        </ul>
+        <p class="note" style="font-size: 0.5em;">(your core business logic should not depend on implementation details)</p>
+      </section>
+
+      <!-- Clean Architecture Dependencies -->
+      <section style="font-size: 0.7em;">
+        <h2>Clean Architecture: Dependencies Rule</h2>
+        <div class="side-by-side">
+          <div>
+            <img style="max-width: 90%; height: auto; max-height: 40vh;" src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" alt="Clean Architecture Circles" class="clean-arch-diagram">
+          </div>
+          <div>
+            <ul>
+              <li>Source code dependencies point inward</li>
+              <li>Inner circles know nothing about outer circles</li>
+              <li>Outer circles contain implementation details</li>
+              <li>Inner circles contain business rules</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- New section for pair programming patterns -->
+      <section style="font-size: 0.8em;">
+        <h2>(AI) Pair Programming Patterns</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Effective</h3>
+            <ul>
+              <li>Small, focused tasks</li>
+              <li>Iterative refinement</li>
+              <li>Clear acceptance criteria</li>
+              <li>Regular validation</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Ineffective</h3>
+            <ul>
+              <li>Vague requirements</li>
+              <li>Large, complex changes</li>
+              <li>No context sharing</li>
+              <li>Blind trust in output</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secure SDLC Fundamentals -->
+      <section style="font-size: 0.8em;">
+        <h2>Secure Development Lifecycle</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Core Principles</h3>
+            <ul>
+              <li><a href="https://blog.google/technology/safety-security/google-secure-by-design-pledge/?t">Security by Design</a></li>
+              <li><a href="https://www.beyondtrust.com/blog/entry/what-is-least-privilege?t">Least Privilege</a></li>
+              <li><a href="https://delinea.com/blog/what-controls-constitute-a-defense-in-depth-strategy?t">Defense in Depth</a></li>
+              <li><a href="https://blog.sucuri.net/2024/07/input-validation-for-website-security.html?t">Input Validation</a></li>
+              <li><a href="https://techcommunity.microsoft.com/blog/identity/update-to-security-defaults/4044868?t">Secure Defaults</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI-Specific Security Considerations -->
+      <section style="font-size: 0.8em;">
+        <h2>Secure AI-assissted SDLC</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>New Challenges</h3>
+            <ul>
+              <li>Unvetted Third-Party Dependencies</li>
+              <li>Hardcoded Secrets & Data Leakage</li>
+              <li>Incomplete Security Context/Prompts</li>
+              <li>Insufficient Boundary & Validation</li>
+              <li>Insecure Default Configurations</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Best Practices</h3>
+            <ul>
+              <li>Mandatory Human Review for Security</li>
+              <li>Automated Vulnerability Scans</li>
+              <li>Explicit Security Context for AI</li>
+              <li>Granular Testing & Validation</li>
+              <li>Security-Focused Code Reviews</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Looking Ahead -->
+      <section>
+        <h2>Next Session: Iterative Development & Testing</h2>
+        <ul>
+          <li>TDD workflows with AI assistance</li>
+          <li>Performance optimization strategies</li>
+          <li>Error handling patterns</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: []
+    });
+  </script>
+</body>
+</html> 

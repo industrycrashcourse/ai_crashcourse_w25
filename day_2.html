@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+    .code-example {
+      background-color: #1c1c1c;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+    }
+    .side-by-side > div {
+      flex: 1;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Title Slide -->
+      <section>
+        <h2>Day 2</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          CS 480<br>
+          Winter 2025<br>
+        </p>
+      </section>
+
+      <!-- Today's Agenda -->
+      <section>
+        <h2>Today's Agenda</h2>
+        <ul>
+          <li>Dev setup</li>
+          <li>Cursor demo</li>
+          <li>Machine Learning: Lightning Overview</li>
+          <li>Theory: Language Models</li>
+        </ul>
+      </section>
+
+      <!-- Main Content Sections -->
+      <section>
+        <h2>Dev Setup</h2>
+        
+        <div class="side-by-side">
+          <div>
+            <u>Software to install (now!)</u>
+            <ul>
+              <li><a href="https://www.python.org/downloads/">python</a> 3.10+</li>
+              <li><a href="https://www.docker.com/">docker</a></li>
+              <li><a href="https://www.cursor.com/">Cursor</a> (get the $20/month plan)</li>
+              <li><a href="https://github.com/All-Hands-AI/OpenHands">OpenHands</a></li>
+            </ul>
+          </div>
+          <div>
+            <u>Accounts to get</u>
+            <ul>
+              <li><a href="https://github.com/">github</a> (free)</li>
+              <li><a href="https://huggingface.co/">huggingface</a> (free)</li>
+              <li><a href="https://openai.com/index/openai-api/">OpenAI API</a> (buy at least $5-$20 of credits)</li>
+              <li><a href="https://console.anthropic.com/login">Anthropic API</a> (you'll probably want similar)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Demo: Cursor, Claude 3.5 Sonnet, & o1</h2>
+        <ul>
+          <li>my project: TODO-list AI Assistant</li>
+          <li>It has "memory" based on Redis</li>
+          <li>I want to add neo4j-based "graph memory"</li>
+          <li>but I don't know much about neo4j</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Machine Learning: 100k' view</h2>
+        <div class="side-by-side">
+          <div>
+            <ul>
+              <li>Unsupervised</li>
+              <li>Supervised</li>
+              <li>Self-supervised</li>
+              <li>Reinforcement Learning</li>
+              <li>Few-shot learning</li>
+              <li>Transfer learning</li>
+            </ul>
+          </div>
+          <div>
+            <ul><small>
+              <li>clustering, dimensional reduction, anomaly detection</li>
+              <li>classification, regression, object detection</li> 
+              <li>next-token/frame prediction, weather</li>
+              <li>games (alpha-go, WoW), robotics, optimization (e.g. alpha-fold), from-human feedback (RLHF)</li>
+              <li>learning from very few examples</li>
+              <li>applying knowledge from one domain to another</li>
+            </small></ul>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h2>Language Models: 10,000' view </h2>
+        <a href="https://cameronrwolfe.substack.com/p/language-model-training-and-inference"><img src="./llm_schematic.jpg"/></a>
+      </section>
+
+      <section>
+        <h2>Language Models: Lighning Intro</h2>
+        <ul>
+          <li>Tokenization</li>
+          <li>per-token learning: MLP</li>
+          <li>location: positional encoding</li>
+          <li>inter-attention learning: Attention</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tokenization</h2>
+        Text => sequence of e.g. 16384-dim float arrays
+        <img src="./tokenization_schematic.jpg" style="max-width: 90%; height: auto; max-height: 40vh;"/>
+      </section>
+
+      <section>
+        <h2>Position Embeddings</h2>
+        Add to vector "i" a special "position-i" vector 
+        <img src="./position_embeddings.jpg" style="max-width: 90%; height: auto; max-height: 40vh;"/>
+      </section>
+
+      <section>
+        <h2>Per-embedding processing: MLP</h2>
+        Map N-d float vector => N-d via 2 matrix mults
+        <a href="https://ml-cheatsheet.readthedocs.io/en/latest/forwardpropagation.html">
+          <img src="./MLP.jpg" style="max-width: 90%; height: auto; max-height: 40vh;"/>
+        </a>
+      </section>
+
+      <section>
+        <h2>Intra-token processing: Attention!</h2>
+        <div class="side-by-side">
+          <div>
+            <ul>
+              <li>define 3 matrices: W<sub>Q</sub>, W<sub>K</sub>, and W<sub>V</sub></li>
+              <li>for token i: t<sub>i</sub>, create
+                <ul>
+                 <li>Q<sub>i</sub> = W<sub>Q</sub> * t<sub>i</sub></li>
+                 <li>K<sub>i</sub> = W<sub>K</sub> * t<sub>i</sub></li>
+                 <li>V<sub>i</sub> = W<sub>V</sub> * t<sub>i</sub></li>
+                 </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            "self-attention" matrix mults:
+            <ul>
+              <li>X = e<sup>Q * K<sup>T</sup> / sqrt(D)</sup></li>
+              <li>A<sub>ij</sub> = X<sub>ij</sub> / sum<sub>i</sub>X<sub>ij</sub></li>
+              <li>out = A * V</li>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Attention: TL;DR</h2>
+        Each token given a way to "ask" other tokens a <b><u>Q</u></b>uery, which it wants
+        (roughly) <u>one</u> response for.<br/> <br/>
+        To find out which token to take a response from, the other tokens 
+        respond to a degree that the query matches <b><u>K</u></b>ey, responds with its own 
+        <b><u>V</u></b>alue.<br/><br/>
+        In LLMs, attention is "multi-headed": we break W<sub>Q,K,V</sub> 
+        into many independent "heads", each allowing different query/response pairs
+      </section>
+
+      <section>
+        <h2>Transformer model</h2>
+        <ol>
+          <li>Attention layer: all tokens ask many queries of all other tokens</li>
+          <li>Feed-forward Layer: each token independently goes through an MLP <br/>
+            (mixing the information from the different attention heads)</li>
+          <li>repeat this num_layers times</li>
+          <li>finally: "decoder" layer which turns an embedding vector into a token prediction</li>
+        </ul>
+      </section>
+
+
+      <section>
+        <h2>Training Language Models</h2>
+        Stages (+ approx 2024 costs: Llama 70B) of training:
+        <div class="side-by-side">
+          <div>
+            <ul>
+              <li>pre-training</li>
+              <li>"cont." pre-training</li>
+              <li>instruction SFT</li>
+              <li>(<b>new</b>) reasoning FT</li>
+              <li>alignment tuning (RLHF / RLAIF / DPO)</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>$5-50M</li>
+              <li>$0.5M-$5M</li>
+              <li>$10-$100k</li>
+              <li>???</li>
+              <li>$5-$50k</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Language Models: Pre-Training</h2>
+        Self-supervised: predict next-token 
+        <img src="./llm_schematic.jpg" style="max-width: 90%; height: auto; max-height: 40vh;"/>
+      </section>
+
+      <section>
+        <h2>Continued Pretraining</h2>
+        Relatively recent development: train on very high-quality / heavily filtered web data + code + "synthetic textbooks"
+        <br/><br/>
+        Leads to much higher downstream task success
+      </section>
+
+      <!-- Code Example Template -->
+      <section>
+        <h2>Instruction Fine-Tuning</h2>
+        <div class="side-by-side">
+          <div style="flex: 0 0 45%; margin-right: auto; margin-left: -100px;">
+            <pre><code class="code-example" style="font-size: 0.6em;">
+data = [
+  {
+    "instruction": "Summarize this text:",
+    "input": "The Renaissance was a ...",
+    "output": "The Renaissance transformed \n
+European art and thinking."
+  },
+  {
+    "instruction": "Respond as a helpful bot",
+    "input": "What is the capital of Algeria?",
+    "output": "The capital of Algeria is Algiers"
+  }, 
+  ... 
+]          
+            </code></pre>
+          </div>
+          <div>
+            <ul>
+              <li>Supervised ML problem:</li>
+              <li>Train on instruction + input => output</li>
+              <li>diverse instruction tasks</li>
+              <li>turns LLM => a "<a href="https://bsky.app/profile/colin-fraser.net/post/3ldoyuozxwk2x">role player</a>"</li>
+              <li>see also <a href="https://medium.com/@colin.fraser/who-are-we-talking-to-when-we-talk-to-these-bots-9a7e673f8525">here</a></li>
+              <li><b>never</b> expect a Chatbot to have good answers about <u>itself</u></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Reasoning Training</h2>
+        very <a href="https://docs.google.com/presentation/d/1PNipMudHb5HTNnVosve0lqdrgwKSWck4SCE9TSPCJkY/edit#slide=id.p">speculative</a>: o1 training not public<br/>
+        <br/>
+        Possibly:
+        <ul>
+          <li>"RL on verifiable outputs"</li>
+          <li>generates "inner monologue" to train on</li>
+          <li>based on many specialized examples of "Chain of Thought"</li>
+          <li>OpenAI doesn't share what the model "is thinking"</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Alignment Tuning</h2>
+        RL via Human Feedback, AI Feedback<br/>
+        Direct Preference Optimization (easier than RL):<br/>
+        <ul>
+          <li>given input + [good output, bad output]</li>
+          <li>train the model to predict which one is "good"</li>
+          <li>learns how to refuse to do "bad" things</li>
+          <li>AI safety, copyright avoidance, Tiannamen Sq...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Different actors can do different steps</h2>
+        <ul>
+          <li>Pretraining (expensive, let someone else!)</li>
+          <li>Continued-pretraining (add new knowledge)</li>
+          <li>Instruction tuning (add task types)</li>
+          <li>RLAIF + DPO (re-align to your needs)</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2>Whirlwind recap</h2>
+        LLMs are:
+        <ul>
+          <li>Big stacks of embedding + N * (attention + MLP)</li>
+          <li>trained via self-supervion on <u>next-token</u> prediction</li>
+          <li>then instruction-tuned (supervised ML)</li>
+          <li>finally alignment tuned (on human/other AI preferences)</li>
+        </ul>
+      </section>
+
+      <!-- Looking Ahead -->
+      <section>
+        <h2>Next Session</h2>
+        <ul>
+          <li>Coding with AI: Strategies</li>
+          <li>Prompt Engineering / Custom Instructions</li>
+          <li>Known Limitations</li>
+          <li>Places to learn more</li>
+        </ul>
+      </section>
+
+      <!-- Questions -->
+      <section>
+        <h2>Questions?</h2>
+        <p>Let's discuss!</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: []
+    });
+  </script>
+</body>
+</html> 

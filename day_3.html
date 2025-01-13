@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+    .code-example {
+      background-color: #1c1c1c;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+    }
+    .side-by-side > div {
+      flex: 1;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- talk track:
+           Introduce Day 3 by briefly recapping what was covered in the previous sessions.
+           Emphasize the shift towards practical usage of prompt engineering and advanced project planning with AI. 
+      -->
+      <section>
+        <h2>Day 3</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          CS 480<br>
+          Winter 2025<br>
+        </p>
+      </section>
+
+      <!-- talk track:
+           Quickly remind students about the concepts from Day 2: LLMs, self-supervision, transform layers, etc.
+           Use a short Q&A to gauge understanding before diving into new content.
+      -->
+      <section>
+        <h2>Review</h2>
+        <ul>
+          <li>LLMs are self-supervised next-token predictors</li>
+          <li>which process text -> token -> embedding vector</li>
+          <li>through a stack of "transformer" layers:</li>
+          <ul>
+            <li>"attention" to let tokens in a sequence talk to each other</li>
+            <li>multi-layer perceptrons to encode / synthesize per-token info</li>
+          </ul>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Outline what's coming today. Emphasize that these topics build on LLM fundamentals but focus on actual development workflows.
+           Encourage questions or clarifications on usage patterns. 
+      -->
+      <section>
+        <h2>Today's Agenda</h2>
+        <ul>
+          <li>Prompt engineering for code generation</li>
+          <li>Strategies for breaking down problems</li>
+          <li>Discussion of capabilities/limitations</li>
+          <li>Best practices for AI collaboration</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Quick check</h2>
+        Which stage of training to get a model to:
+        <div class="side-by-side">
+          <div>
+        <ul>
+          <li>rap in iambic pentameter</li>
+          <li>learn Navajo</li>
+          <li>talk like a pirate</li>
+          <li>be more friendly</li>
+          <li>understand video</li>
+        </ul>
+        </div>
+        <div>
+          <ul>
+            <li>pre-training</li>
+            <li>continued pretraining</li>
+            <li>instruction fine-tuning</li>
+            <li>reasoning tuning</li>
+            <li>RLHF / DPO</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Scaling Language Models</h2>
+        Language models get "automatically" better in several ways. log(quality) scales as:
+        <ul>
+          <li>More parameters: log(model_size)</li>
+          <li>More data: log(data_size)</li>
+          <li><sup style="color: red; display: inline-block; transform: rotate(-45deg);">new!</sup>More time to respond: log(response_time)</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Emphasize that AI won’t spontaneously do everything for them.
+           They still need to plan, define scope, decide which tasks are “AI-friendly,” etc.
+      -->
+      <section>
+        <h2>AI-Assisted Project Planning</h2>
+        <ul>
+          <li>Aligning project scope with AI capabilities</li>
+          <li>Identifying areas where AI collaboration offers the biggest gains</li>
+          <li>Establishing clear high-level requirements before coding</li>
+          <li>Allocating time for “human validation” of AI output</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Make sure students understand: choosing the right scope is half the battle. 
+           Mention that overly ambitious or domain-heavy projects can derail progress.
+      -->
+      <section>
+        <h2>Choosing a Good Project Scope</h2>
+        <ul>
+          <li>Focus on interesting/ambitious but tractable ideas</li>
+          <li>Try to minimize domain complexity if you’re new to that area</li>
+          <li>Leverage existing libraries + frameworks to speed up development</li>
+          <li>Consider a “data pipeline” flow for the AI to help with transformations</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Encourage them to incorporate a short prototype as soon as possible. 
+           Stress the importance of verifying AI code and iterative prompting. 
+      -->
+      <section style="font-size: 0.7em;">
+        <h2>Best Practices for Working with Coding Assistants</h2>
+        <ol>
+          <li><strong>Prototype Early</strong><br>
+            Use the AI to generate initial scaffolding, then refine your structure.
+          </li>
+          <li><strong>Validate Often</strong><br>
+            Keep a tight feedback loop: unit tests, small commits, code reviews.
+          </li>
+          <li><strong>Prompt Iteration</strong><br>
+            Refine your prompts and system instructions with each iteration.
+          </li>
+          <li><strong>Style & Consistency</strong><br>
+            Maintain a consistent coding style; correct any AI “idiosyncrasies” you see.
+          </li>
+          <li><strong>Document AI Interaction</strong><br>
+            Keep logs of major AI contributions to maintain academic (and real-world) integrity.
+          </li>
+        </ol>
+      </section>
+
+      <!-- talk track:
+           Show them examples of how they can “ask” the LLM for specific tasks. 
+           Emphasize that the language in prompts matters significantly for clarity and quality.
+      -->
+      <section style="font-size: 0.7em;">
+        <h2>Prompting Patterns</h2>
+        <ul>
+          <li>“Clarify Requirements” prompt:
+            <pre><code>
+"Task: We need a function that merges two dictionaries. 
+ 1. Provide a preliminary approach 
+ 2. Outline constraints / edge cases 
+ 3. Show testing strategy"
+            </code></pre>
+          </li>
+          <li>“Debugging” prompt:
+            <pre><code>
+"Task: Debug the function below. 
+  1. Identify root cause 
+  2. Suggest fixes (short) 
+  3. Summarize your reasoning"
+            </code></pre>
+          </li>
+          <li>“Refactoring” prompt:
+            <pre><code>
+"Refactor this method for readability and performance. 
+ Provide explicit tradeoffs in style vs. speed."
+            </code></pre>
+          </li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Additional prompt ideas. 
+           Encourage them to incorporate these patterns into their own day-to-day coding.
+      -->
+      <section style="font-size: 0.7em;">
+        <h2>More Prompting Patterns</h2>
+        <ul>
+          <li>"Complexity Analysis" prompt:
+            <pre><code>
+"Analyze the time/space complexity of this code.
+ 1. Best/worst/average case
+ 2. Identify bottlenecks
+ 3. Suggest optimizations with tradeoffs"
+            </code></pre>
+          </li>
+          <li>"Performance Testing" prompt:
+            <pre><code>
+"Help create a benchmark suite for this code:
+ 1. Generate test data at different scales
+ 2. Measure key operations/memory usage
+ 3. Compare against baseline implementations"
+            </code></pre>
+          </li>
+          <li>"Architecture Comparison" prompt:
+            <pre><code>
+"Compare these architectural approaches:
+ 1. Scalability characteristics
+ 2. Maintenance/operational costs
+ 3. Implementation complexity
+ 4. Data consistency guarantees"
+            </code></pre>
+          </li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Show how to apply these prompts in a live scenario. 
+           Perhaps code a small function and let the AI do some changes. 
+           Emphasize acceptance/rejection and the reasoning behind it.
+      -->
+      <section>
+        <h2>Live Prompting Demo</h2>
+        <ul>
+          <li>Pick a small snippet of code to modify</li>
+          <li>Demonstrate various prompt styles for the same piece of code</li>
+          <li>Show how you’d reject or accept each AI suggestion</li>
+          <li>Discuss possible pitfalls (e.g., misaligned or redundant solutions)</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Introduce them to the unique features of different tools. 
+           Invite them to share any early experiences or limitations they’ve noticed so far. 
+      -->
+      <section>
+        <h2>IDE / Tooling Features</h2>
+        <ul>
+          <li>GitHub Copilot "ghost text" vs. Cursor's inline Chat vs. Claude "web chat"</li>
+          <li>Command Palette actions: "Explain Code", "Generate Tests", etc.</li>
+          <li>Model selection: o1 for reasoning, Claude for algorithms</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Highlight that Cursor can integrate with docs, GitHub, and even external URLs. 
+           Let them know these features can streamline coding significantly, but they also have limits.
+      -->
+      <section style="font-size: 0.7em;">
+        <h2>Cursor's Integrated Tools</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Built-in Features</h3>
+            <ul>
+              <li>@docs - official documentation</li>
+              <li>@web - fetch from URLs</li>
+              <li>@gh - GitHub integration</li>
+              <li>Model switching (o1 ↔ Claude)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>When to Still Leave Cursor</h3>
+            <ul>
+              <li>Interactive debugging sessions</li>
+              <li>Visual tools (e.g., DB schema designers, Unity)</li>
+              <li>Real-time collaboration</li>
+              <li>Local development/testing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- talk track:
+           Acknowledge that Cursor has a broad feature set, but it can’t replace certain real-time or visual debug tools.
+           Encourage them to think about their own workflows and see where they prefer other specialized tools. 
+      -->
+      <section>
+        <h2>Can I stay in Cursor for everything?</h2>
+        <div style="margin-top: 20px;">
+          <h3>Devil's Advocate Response:</h3>
+          <p style="font-size: 0.8em;">
+            "While Cursor can fetch external context, you still need to:<br>
+            1. Run your code (terminal, browser, etc.)<br>
+            2. Use specialized dev tools (profilers, debuggers)<br>
+            3. Collaborate in real-time with others<br>
+            4. Validate AI suggestions against running systems"
+          </p>
+        </div>
+      </section>
+
+      <!-- talk track:
+           Warn them of potential problems if they trust the AI blindly. 
+           Share real anecdotes (e.g., AI hallucinating library calls).
+      -->
+      <section>
+        <h2>Pitfalls & Limitations of AI Code Generation</h2>
+        <ul>
+          <li>Inaccurate or hallucinatory suggestions</li>
+          <li>Security holes introduced by naive code generation</li>
+          <li>Over-reliance on AI for tricky logic</li>
+          <li>Failing to keep project context in mind (AI can lose track over time)</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           This exercise fosters collaboration and ensures they start thinking concretely about how AI will help with their own project.
+      -->
+      <section>
+        <h2>Student Brainstorming Exercise</h2>
+        <ul>
+          <li>Brainstorm 2-3 micro-features per project that an AI assistant could be particularly helpful on</li>
+          <li>Discuss common AI failure molds (e.g., ambiguous specs, large code merges)</li>
+          <li>Share any “debugging or new feature” pain points with the group</li>
+        </ul>
+      </section>
+
+      <!-- talk track:
+           Clearly state next steps so they leave the lecture with an action plan. 
+           Encourage them to responsibly track prompts and reflect on errors or refinements.
+      <section>
+        <h2>Next Steps / Homework</h2>
+        <ul>
+          <li>Refine your project idea from last class</li>
+          <li>Identify one “AI-heavy” component of your project to attempt soon</li>
+          <li>Commit initial project scaffolding to GitHub (with minimal AI usage first)</li>
+          <li>Document your prompting attempts in a “Prompt Log” .md file</li>
+        </ul>
+      </section>
+
+      -->
+
+      <section>
+        <h2>Due tomorrow</h2>
+        <p>5min "elevator pitch" on your project, how you think using AI will help / not-help it</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: []
+    });
+  </script>
+</body>
+</html> 

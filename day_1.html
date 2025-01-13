@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Title Slide -->
+      <section>
+        <h1>Software Engineering in an AI World</h1>
+        <h2>Developing with Coding Assistants as Co-Intelligences</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          CS 480<br>
+          Winter 2025<br>
+        </p>
+      </section>
+
+      <!-- About the Instructor -->
+      <section>
+        <h2>About Your Instructor</h2>
+        <div style="text-align: left;">
+          <p>Jake Mannix</p>
+          <ul>
+            <li>25+ years in software engineering</li>
+            <li>Currently: Technical Fellow for AI & Relevance at Walmart Global Tech</li>
+            <li>Previously: LinkedIn, Salesforce, Twitter, Allen Institute for AI, startups</li>
+            <li>Focus area: AI Infrastructure, Search, RecSys</li>
+            <li>College email: jmannix@collegeofidaho.edu</li>
+            <li>Personal email: jake.mannix@gmail.com</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Course Overview -->
+      <section>
+        <h2>Course Overview</h2>
+        <ul>
+          <li>Intensive 4-week project-based course</li>
+          <li>Focus on practical AI collaboration skills</li>
+          <li>Real-world project development</li>
+          <li>Weekly research and reflection assignments</li>
+          <li>Emphasis on both capabilities and limitations</li>
+        </ul>
+        <p><a href="syllabus.pdf" target="_blank">Detailed Syllabus</a></p>
+      </section>
+
+      <!-- After Course Overview and before Current Landscape -->
+      <section>
+        <h2>Why AI in Software Engineering?</h2>
+        <ul>
+          <li>Transformative moment in our industry</li>
+          <li>New tools require new skills</li>
+          <li>Opportunity to shape the future of development</li>
+          <li>Critical to understand both potential and limitations</li>
+        </ul>
+      </section>
+
+      <!-- The Current Landscape -->
+      <section>
+        <h2>The Current Landscape</h2>
+        <p>AI is revolutionizing software development</p>
+        <ul>
+          <li><a href="https://venturebeat.com/ai/developers-embrace-ai-tools-but-face-big-code-challenges-survey-finds/">95%</a> of developers use AI today</li>
+          <li>40-60% <a href="https://www.vox.com/future-perfect/2023/3/14/23637633/chatgpt-bing-generative-ai-ethan-lilach-mollick">productivity gains</a> reported (e.g. <a href="https://arxiv.org/pdf/2302.06590">here</a>)</li>
+          <li>Dramatic reduction in routine coding tasks</li>
+          <li>Shift in developer workflow paradigms: designing, architecting, guiding, but less boilerplate</li>
+          <!-- insert more usage statistics-->
+          
+          <!-- then list what kinds of things are coming down the pipeline: -->
+          <li>OpenAI's o3 model: <a href="https://codeforces.com/blog/entry/137539">2727 on Codeforces</a> (only beat by 175 humans, anywhere)</li>
+        </ul>
+      </section>
+
+      <!-- Before Key Players section -->
+      <section>
+        <h2>The AI Developer Ecosystem</h2>
+        <ul>
+          <li>Three major categories of tools:</li>
+          <li class="fragment">IDE Integration & Coding Assistants</li>
+          <li class="fragment">Large Language Models for Code</li>
+          <li class="fragment">Autonomous Coding Agents</li>
+        </ul>
+      </section>
+      <!-- Key Players -->
+      <section>
+        <h2>Key Players in AI Development</h2>
+        <h4>IDE / Coding Assistants</h4>
+        <div style="display: flex; justify-content: space-around;">
+          <div style="flex: 1;">
+            <ul>
+                  <li>GitHub Copilot</li>
+                  <li>Amazon Q</li>
+                  <li>Cursor.sh</li>
+                  <li>Codium Windsurf</li>
+            </ul>
+          </div>
+          <div style="flex: 1;">
+                <ul>
+                  <li>Tabnine</li>
+                  <li>Aider</li>
+                  <li>Continue.dev</li>
+                  <li>Sourcegraph Cody</li>
+                </ul>
+          </div>
+        </div>
+      </section>
+    <section>
+          <h2>Capable Code LLMs</h2>
+            <ul>
+              <li>Anthropic Claude 3.5 Sonnet (my favorite)</li>
+              <li>OpenAI o1 (better at multistep reasoning)</li>
+              <li>OpenAI GPT-4o, Gemini Pro (almost as good)</li>
+              <li>Deepseek v3 (open source out of China)</li>
+              <li>lots more open ones on the <a href="https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard">Huggingface leaderboard</a></li>
+            </ul>
+          </li>        
+      </section>
+
+      <section>
+        <h2>Coding Agents</h2>
+        <ul>
+          <li>AI systems that can <u>autonomously</u> plan and execute complex coding tasks</li>
+          <li>High-level requirements => steps</li>
+          <li>Able to use <u>tools</u> like: 
+            <ul>
+              <li>Package managers, shell, git, build system, web browser</li>
+            </ul>
+          </li>
+          <li>Examples: Devin, Openhands, AutoGPT</li>
+          <li>Still emerging technology - requires validation</li>
+        </ul>
+      </section>
+
+      <!-- a page listing open and corp SWE agents -->
+
+      <!-- another page describing some SWE benchmarks -->
+
+      <section>
+        <h2>Tools where AI is used</h2>
+        <a href="https://www.linkedin.com/posts/debarghyadas_if-youre-not-using-ai-apps-in-2025-youre-activity-7280251438943936513-uneG">
+        <img src="ai_apps.jpg" style="max-width: 90%; height: auto; max-height: 50vh;"/>
+        </a>
+       
+      </section>
+
+      <!-- Before Live Demo -->
+      <section>
+        <h2>From Theory to Practice</h2>
+        <ul>
+          <li>Let's see these tools in action</li>
+          <li>Real-world development scenario</li>
+          <li>Interactive demonstration</li>
+          <li>Focus on practical workflow</li>
+        </ul>
+      </section>
+
+      <!-- Live Demo Introduction -->
+      <section>
+        <h2>Live Demo: AI-Assisted Development</h2>
+        <p>Building a Scalable Disjunction Query System</p>
+        <ul>
+          <li>Complex data structure implementation</li>
+          <li>Performance optimization</li>
+          <li>Test suite development</li>
+        </ul>
+      </section>
+
+      <!-- Demo Goals -->
+      <section>
+        <h2>Demo Goals</h2>
+        <ul>
+          <li>Effective prompt engineering</li>
+          <li>Iterative development with AI</li>
+          <li>Code validation strategies</li>
+          <li>Performance testing</li>
+        </ul>
+      </section>
+
+      <!-- Before Project Work -->
+      <section>
+        <h2>Putting It All Together</h2>
+        <ul>
+          <li>Moving from demos to real projects</li>
+          <li>Applying what we've learned</li>
+          <li>Building something meaningful</li>
+          <li>Learning through doing</li>
+        </ul>
+      </section>
+
+      <!-- Project Work -->
+      <section>
+        <h2>Course Projects</h2>
+        <ul>
+          <li>Self-directed projects in new technical territories</li>
+          <li>Regular check-ins and milestone reviews</li>
+          <li>Focus on learning through AI collaboration</li>
+          <li>Documentation of successes and failures</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Example Project Ideas</h2>
+        <ul>
+          <li>Social Webapp <br><small>(on ATProto that Bluesky uses? or encrypted/private?)</small></li>
+          <li>iOS game <br><small>(potentially with server-side multiplayer stuff?)</small></li>
+          <li>Open Source Duolingo competitor</li>
+          <li>AI-powered todo-list helper</li>
+          <li>Fine-tuned LLM for RPG NPCs</li>
+          <li>???</li>
+        </ul>
+      </section>
+
+      <!-- Weekly Assignments -->
+      <section>
+        <h2>Weekly Deliverables</h2>
+        <ul>
+          <li>Research summary on AI in software development
+            <ul>
+              <li>News reports, papers, blog posts</li>
+              <li>Critical analysis of claims</li>
+              <li>Economic and ethical implications</li>
+            </ul>
+          </li>
+          <li>Project progress report
+            <ul>
+              <li>AI collaboration successes</li>
+              <li>Challenges and workarounds</li>
+              <li>Lessons learned</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Questions -->
+      <section>
+        <h2>Questions?</h2>
+        <p>Let's discuss your project ideas and get started!</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: []
+    });
+  </script>
+</body>
+</html>
