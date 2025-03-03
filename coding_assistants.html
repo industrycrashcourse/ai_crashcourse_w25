@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Practices for Coding Assistants</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+  <style>
+    .reveal section img { background: none; border: none; box-shadow: none; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal li, .reveal ol li { margin: 20px 0; }
+    .author-info { font-size: 0.8em; }
+    .highlight { color: #42affa; }
+    .reveal .slides {
+      width: 100%;
+      height: 100%;
+    }
+    .reveal .slides section {
+      width: 90vw;  /* Use viewport width */
+    }
+    pre {
+      width: 100%;
+      margin: 0;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    pre code {
+      width: 100%;
+      max-width: none;
+      background-color: #1c1c1c;
+      color: #eee;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      display: block;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    .side-by-side {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .side-by-side > div {
+      flex: 1;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <!-- Rest of your slides content remains exactly the same -->
+      <!-- Title Slide -->
+      <section>
+        <h2>AI for Software Engineering</h2>
+        <p class="author-info">
+          Jake Mannix<br>
+          <span style="font-size: 0.5em">(based on how I work & my CS Capstone course at the College of Idaho)</span>
+        </p>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Overview</h2>
+        <ol>
+            <li>AI-flow for tech leaders and architects</li>
+            <li>AI+SDLC for X2-X5</li>
+            <li>Case Study: Experiment on my Students</li>
+            <li>The Near Future</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Jake and his pal Claude</h2>
+        <ol>
+            <li>AI-everywhere as the NL Interface</li>
+            <li>How I keep up: Talk to Arxiv</li>
+            <li>Virtual CoS: notes into categorized ToDos</li>
+            <li>Cure for "Manager's Schedule"?</li>
+            <li>"Rubber-duck" arch/design/theory chat</li>
+            <li>Automate the boring crap</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>AI as NL Interface</h2>
+        <ol>
+            <li>bash -> Warp + LLM: <a href="http://localhost:8000/intro_warp_shell_demo.mov" target="_blank">video</a></li>
+            <ul style="font-size: 0.5em">
+              <li>I've got some parquet files somewhere in my home directory that I've downloaded in the past 2 days, where are they?</li>
+              <li>if I think the wget download is stalled and want to start it up again, will it do this automatically, or is there some argument magic I need to invoke?</li>
+              <li>lotte.tar.gz in the ~/src/open_src/ColBERT/LoTTE directory - it's being downloaded now, but I want to look at it now</li>
+              <li>is it possible to convert some of that file to parquet while still downloading?</li>
+            </ul>
+            <li>chrome + ctrl-F -> Arc Max + LLM</li>
+            <li>VSCode -> Cursor + LLM (more soon)</li>
+            <li>previously impossible -> Openhands automated SDE</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Talk to Arxiv</h2>
+        <ol>
+            <li>Paste PDFs + images into claude.ai / chatGPT</li>
+            <li><a href="https://claude.ai/new">hi Claude!</a></li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Virtual Chief of Staff</h2>
+        <ol>
+            <li>scattered random notes-to-self</li>
+            <li>say "give me some categories for these"</li>
+            <li>when happy: "now group these into them"</li>
+            <li>running conversation to ask "what is done/not?"</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Cure for "Manager's Schedule"</h2>
+        <h3>i.e context switching reboot</h3>
+        <ol>
+            <li>on ChatGPT.com / Claude.ai: many threads</li>
+            <li>go back and ask, "where were we?"</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>"Rubber-duck" Arch/Design/Exploration</h2>
+        <ol>
+            <li>best to just <a href="http://localhost:8000/0to3.mov" target="_blank">show</a> you</li>
+            <li>sometimes you can really <a href="http://localhost:8000/argue_cuda_with_o1" target="_blank">go at it</a> with them</li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Automate the Boring Crap</h2>
+        <ol>
+            <li>migrations</li>
+            <li>translations</li>
+            <li>add tests to existing codebase</li>
+            <li>cleanup</li>
+            <li>demo: <a href="http://localhost:8000/openhands.mov" target="_blank">Openhands</a></li>
+        </ol>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Senior Engineers juggling chainsaws</h2>
+        <h3>what about the newer engineers?</h3>
+        <ol>
+            <li>ask for explanations, but vet them</li>
+            <li>testGen great, TDD also, <b>BUT</b> beware simultaneously!</li>
+            <li>no excuse to not have TONS of tests</li>
+            <li>make sure to include senior devs for review</li>
+        </ol>
+      </section>
+
+      <!-- Best Practices for Working with Coding Assistants -->
+      <section style="font-size: 0.7em;">
+        <h2>Best Practices for Working with Coding Assistants</h2>
+        <ol>
+          <li><strong>Prototype Early</strong><br>
+            Use the AI to generate initial scaffolding, then refine your structure.
+          </li>
+          <li><strong>Validate Often</strong><br>
+            Keep a tight feedback loop: unit tests, small commits, code reviews.
+          </li>
+          <li><strong>Prompt Iteration</strong><br>
+            Refine your prompts and system instructions with each iteration.
+          </li>
+          <li><strong>Style & Consistency</strong><br>
+            Maintain a consistent coding style; correct any AI "idiosyncrasies" you see.
+          </li>
+          <li><strong>Document AI Interaction</strong><br>
+            Keep logs of major AI contributions to maintain academic (and real-world) integrity.
+          </li>
+        </ol>
+      </section>
+
+      <!-- Prompting Patterns -->
+      <section style="font-size: 0.7em;">
+        <h2>Prompting Patterns</h2>
+        <ul>
+          <li>"Clarify Requirements" prompt:
+            <pre><code>"Task: We need a function that merges two dictionaries.
+ 1. Provide a preliminary approach
+ 2. Outline constraints / edge cases
+ 3. Show testing strategy"</code></pre>
+          </li>
+          <li>"Debugging" prompt:
+            <pre><code>"Task: Debug the function below.
+  1. Identify root cause
+  2. Suggest fixes (short)
+  3. Summarize your reasoning"</code></pre>
+          </li>
+          <li>"Refactoring" prompt:
+            <pre><code>"Refactor this method for readability and performance.
+ Provide explicit tradeoffs in style vs. speed."</code></pre>
+          </li>
+        </ul>
+      </section>
+
+      <!-- More Prompting Patterns -->
+      <section style="font-size: 0.7em;">
+        <h2>More Prompting Patterns</h2>
+        <ul>
+          <li>"Complexity Analysis" prompt:
+            <pre><code>"Analyze the time/space complexity of this code.
+ 1. Best/worst/average case
+ 2. Identify bottlenecks
+ 3. Suggest optimizations with tradeoffs"</code></pre>
+          </li>
+          <li>"Performance Testing" prompt:
+            <pre><code>"Help create a benchmark suite for this code:
+ 1. Generate test data at different scales
+ 2. Measure key operations/memory usage
+ 3. Compare against baseline implementations"</code></pre>
+          </li>
+          <li>"Architecture Comparison" prompt:
+            <pre><code>"Compare these architectural approaches:
+ 1. Scalability characteristics
+ 2. Maintenance/operational costs
+ 3. Implementation complexity
+ 4. Data consistency guarantees"</code></pre>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Cursor's Integrated Tools -->
+      <section style="font-size: 0.7em;">
+        <h2>Cursor's Integrated Tools</h2>
+        <div class="side-by-side">
+          <div>
+            <h3>Built-in Features</h3>
+            <ul>
+              <li>@docs - official documentation</li>
+              <li>@web - fetch from URLs</li>
+              <li>@gh - GitHub integration</li>
+              <li>Model switching (o1 ↔ Claude)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>When to <b>Leave</b> Cursor</h3>
+            <ul>
+              <li><s>Interactive debugging sessions</s></li>
+              <li>Visual tools (e.g., DB schema designers, Unity)</li>
+              <li>Real-time collaboration</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pitfalls & Limitations -->
+      <section>
+        <h2>Limitations of AI Code Generation</h2>
+        <ul>
+          <li>Inaccurate or hallucinatory suggestions</li>
+          <li>Security holes introduced by naive code generation</li>
+          <li>Over-reliance on AI for tricky logic</li>
+          <li>Failing to keep project context in mind (AI can lose track over time)</li>
+        </ul>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Case Study: Experimenting on Students</h2>
+        <ul>
+            <li>Designed two "hard-ish" for AI SDE tasks</li>
+            <li>Split class in two groups</li>
+            <li>One task each group, no AI, recorded dev time</li>
+            <li>I graded them harshly, but fairly</li>
+        </ul>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Case Study: Part 2</h2>
+        <ul>
+            <li>After AI training, groups switched tasks</li>
+            <li>Allowed any/all AI, record dev time</li>
+            <li>I graded them again</li>
+            <li><a href="https://claude.site/artifacts/67224d7b-4e24-4ee0-b191-e7426ea94169">Results</a></li>
+        </ul>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>But beware: "The Illusion of Learning"</h2>
+        <ul>
+            <li>Passive Consumption vs Active Learning</li>
+            <li>The "fluency trap": mistake smooth info flow for comprehension</li>
+            <li>Shortcutting desireable difficulties: mental exercise</li>
+            <li>Missed Metacognition: confusion is <b>good</b>, it's a "signal" like pain</li>
+        </ul>
+      </section>
+
+      <section style="font-size: 0.7em;">
+        <h2>Handling the Illusion of Learning</h2>
+        <ul>
+            <li>Hire <b>curious</b> people!</li>
+            <li>Question yourself, question the AI</li>
+            <li>Design your own "AI Tutor" to foster learning</li>
+            <li>Failure leads to engineers becoming "machine operators"</li>
+        </ul>
+      </section>
+  
+      <section style="font-size: 0.7em;">
+        <h2>The (near) Future</h2>
+        <h4>(but note: predicting things is hard, <s>esp about the future</s> even about the present)</h4>
+        <div class="side-by-side">
+          <div>
+            <ul>
+                <li>Fully unified tooling (today &rightarrow; )</li>
+                <li>Personal, transferable long-term memory</li>
+                <li>PMs building demos from PRDs</li>
+                <li>"vibes-based SDLC" / code in English<br/><p style="font-size: 0.5em">(i.e. soon we'll read code as often as currently look at java bytecode)</p></li>
+            </ul>
+          </div>
+          <div>
+            <p><img src="http://localhost:8000/claude_3_7_swe_bench.jpg" width="75%"/></p>
+            <p><img src="http://localhost:8000/new_claude_code.jpg" width="75%"/></p>
+          </div>
+        </div>
+      </section>
+    
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      width: '95%',
+      height: '95%',
+      margin: 0.02,
+      plugins: []
+    });
+  </script>
+</body>
+</html>
